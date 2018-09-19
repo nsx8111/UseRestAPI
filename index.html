@@ -15,11 +15,13 @@
     <hr>
     <div id="info"></div>
     <script>
-    
+       
         window.onload = () => {
-           
+
             document.getElementById("btnGet").onclick = () => {
-                alert('Click!!');
+                fetch('https://jsonplaceholder.typicode.com/todos/1')
+                .then(response => response.json())
+                .then(json =>document.getElementById('info').innerText = JSON.stringify(json))
             }
         }
 
