@@ -13,6 +13,7 @@
     <hr>
     <input type="button" value="GET" id="btnGet">
     <input type="button" value="POST" id="btnPost">
+    <input type="button" value="PUT" id="btnPut">
     <hr>
     <div id="info"></div>
     <script>
@@ -43,10 +44,29 @@
                 .then(json => setElement('info').innerText = JSON.stringify(json))
         };
 
+        // 更新JSON物件
+        var putJson = () => {
+            fetch('https://jsonplaceholder.typicode.com/posts/1', {
+                method: 'PUT',
+                body: JSON.stringify({
+                    id: 1,
+                    title: 'foo',
+                    body: 'bar',
+                    userId: 1
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+                .then(response => response.json())
+                .then(json => setElement('info').innerText = JSON.stringify(json))
+        };
+
 
         window.onload = () => {
             setElement('btnGet').onclick = getJson;
             setElement('btnPost').onclick = postJson;
+            setElement('btnPut').onclick = putJson;
         }
 
 
