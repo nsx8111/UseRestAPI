@@ -12,11 +12,13 @@
     <h1>Rest API Testing</h1>
     <hr>
     <input type="button" value="GET" id="btnGet">
+    <input type="button" value="POST" id="btnPost">
     <hr>
     <div id="info"></div>
     <script>
         // 用id設定元素
         var setElement = (id) => document.getElementById(id);
+
         // 取得遠端JSON物件
         var getJson = () => {
             fetch('https://jsonplaceholder.typicode.com/todos/1')
@@ -24,9 +26,27 @@
                 .then(json => setElement('info').innerText = JSON.stringify(json))
         };
 
+        // 上傳JSON物件
+        var postJson = () => {
+            fetch('https://jsonplaceholder.typicode.com/posts', {
+                method: 'POST',
+                body: JSON.stringify({
+                    title: 'foo',
+                    body: 'bar',
+                    userId: 1
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+                .then(response => response.json())
+                .then(json => setElement('info').innerText = JSON.stringify(json))
+        };
+
 
         window.onload = () => {
             setElement('btnGet').onclick = getJson;
+            setElement('btnPost').onclick = postJson;
         }
 
 
