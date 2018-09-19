@@ -15,6 +15,7 @@
     <input type="button" value="POST" id="btnPost">
     <input type="button" value="PUT" id="btnPut">
     <input type="button" value="PATCH" id="btnPatch">
+    <input type="button" value="DELETE" id="btnDelete">
     <hr>
     <div id="info"></div>
     <script>
@@ -45,7 +46,7 @@
                 .then(json => setElement('info').innerText = JSON.stringify(json))
         };
 
-        // 更新JSON物件
+        // 更新JSON物件 PUT
         var putJson = () => {
             fetch('https://jsonplaceholder.typicode.com/posts/1', {
                 method: 'PUT',
@@ -63,7 +64,7 @@
                 .then(json => setElement('info').innerText = JSON.stringify(json))
         };
 
-        // 更新JSON物件
+        // 更新JSON物件 PATCH
         var patchJson = () => {
             fetch('https://jsonplaceholder.typicode.com/posts/1', {
                 method: 'PATCH',
@@ -78,12 +79,21 @@
                 .then(json => setElement('info').innerText = JSON.stringify(json))
         };
 
+        // 刪除JSON物件
+        var deleteJson = () => {
+            fetch('https://jsonplaceholder.typicode.com/posts/1', {
+                method: 'DELETE'
+            })
+                .then(() => setElement('info').innerText = "已刪除")
+        };
+
 
         window.onload = () => {
             setElement('btnGet').onclick = getJson;
             setElement('btnPost').onclick = postJson;
             setElement('btnPut').onclick = putJson;
             setElement('btnPatch').onclick = patchJson;
+            setElement('btnDelete').onclick = deleteJson;
         }
 
 
